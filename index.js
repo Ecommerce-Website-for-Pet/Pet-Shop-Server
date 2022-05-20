@@ -18,43 +18,14 @@ db.connect();
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 
-// //Import model
-// const Product = require('./models/Product');
 
-// //Routing Config
-// app.get('/', (reg,res) => {
-//     res.send('Hello');
-// })
+//Import Product Routing
+const productRouter = require('./routes/Product');
+app.use('/products', productRouter);
 
-// //GET /products
-// app.get('/products', (reg,res) => {
-//     // Trả về dữ liệu mẫu?
-//     // let data = [
-//     //     {productCode: 1, productName: "Heineken", productPrice: 19000},
-//     //     {productCode: 2, productName: "Tiger", productPrice: 18000},
-//     //     {productCode: 3, productName: "Sapporo", productPrice: 21000}
-//     // ];
-//     // res.send(data);
-
-//     //Đọc dữ liệu từ db
-//     //Cách 1:
-//     // Product.find({}, (error, data)=>{
-//     //     if(error){
-//     //         res.json({"Error": error.message});
-//     //     }else{
-//     //         res.json(data);
-//     //     }
-//     // })
-    
-//     //Cách 2: Promise
-//     Product.find({})
-//     .then(data => {res.json(data)})
-//     .catch(error=>{res.json({"Error":error.message}) })
-// })
-
-//Import Example Routing
-const exampleRouter = require('./routes/example.router');
-app.use('/', exampleRouter);
+//Import User Routing
+const userRouter = require('./routes/User');
+app.use('/users', userRouter);
 
 app.listen(port, () => {
     console.log(`My server listening on port ${port}`);

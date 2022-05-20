@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 //Import model
-const Product = require('../models/Product');
+const Product = require('../models/Product.js');
 
 //Router config
 //Rendering HomePage
