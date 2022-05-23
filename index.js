@@ -21,7 +21,7 @@ app.use(bodyParser.json());
 
 //Import Product Routing
 const productRouter = require('./routes/Product');
-app.use('/products', productRouter);
+app.use('/', productRouter);
 
 //Import User Routing
 const userRouter = require('./routes/User');
