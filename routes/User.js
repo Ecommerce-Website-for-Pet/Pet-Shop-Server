@@ -3,6 +3,7 @@ const router = express.Router();
 
 //import model
 const User = require('../models/User.js');
+const { route } = require('./Product.js');
 
 //Router config
 //Rendering HomePage
@@ -36,5 +37,31 @@ router.post('/user',async(req,res)=>{
     }
     ;
 })
+// //update User Info
+// router.patch("/:id", async(req,res)=>{
+//     try {
+//         await User.updateOne({_id: req.params.id},{
+//             $set:{
+//                 email: req.body.email,
+//                 password: req.body.password,
+//                 fullName: req.body.fullName,
+//                 phoneNumber: req.body.phoneNumber,
+//                 address: req.body.addres
+//             }
+//         })
+//         res.json({ message: "success" });
+//     } catch (error) {
+//         res.json({message:error.message});
+//     }
+// })
 
+// //Delete User
+// router.delete("/:id",async(req,res)=>{
+//     try{
+//         await User.remove({_id:req.params.id});
+//         res.json({ message: "success" });
+//     }catch(err){
+//         res.json({message:err.message});
+//     }
+// })
 module.exports = router;
