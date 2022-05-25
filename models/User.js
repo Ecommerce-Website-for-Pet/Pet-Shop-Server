@@ -11,7 +11,7 @@ const UserSchema = new mongoose.Schema({
     fullName: {
         type: String,
     },
-    phoneNumber: {
+    phonenumber: {
         type: String,
     },
     address: {

@@ -38,7 +38,7 @@ router.post('/user',async(req,res)=>{
         email: req.body.email,
         password: req.body.password,
         fullName: req.body.fullName,
-        phoneNumber: req.body.phoneNumber,
+        phonenumber: req.body.phonenumber,
         address: req.body.address
     }) 
     try {
@@ -57,7 +57,7 @@ router.patch("/:id", async(req,res)=>{
                 email: req.body.email,
                 password: req.body.password,
                 fullName: req.body.fullName,
-                phoneNumber: req.body.phoneNumber,
+                phonenumber: req.body.phonenumber,
                 address: req.body.address
             }
         })
