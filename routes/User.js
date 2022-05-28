@@ -61,7 +61,7 @@ router.patch("/:id", async(req,res)=>{
                 address: req.body.address
             }
         })
-        res.json({ message: "success" });
+        res.json({ message: "Success" });
     } catch (error) {
         res.json({message:error.message});
     }
@@ -71,7 +71,7 @@ router.patch("/:id", async(req,res)=>{
 router.delete("/:id",async(req,res)=>{
     try{
         await User.remove({_id:req.params.id});
-        res.json({ message: "success" });
+        res.json({ message: "Success" });
     }catch(err){
         res.json({message:err.message});
     }
