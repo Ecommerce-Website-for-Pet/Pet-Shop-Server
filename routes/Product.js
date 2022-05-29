@@ -1,8 +1,29 @@
 const express = require('express');
 const router = express.Router();
 
+const multer = require('multer');
+const imgArr = []
+
 //Import model
 const Product = require('../models/Product.js');
+
+var storage = multer.diskStorage({
+    destination: "images", 
+    filename: (req, file, cb) => {
+        let img = `${Date.now()}--${file.originalname}`
+        cb(null,img );
+        imgArr.push(img)
+        // console.log(file.originalname)
+    }
+})
+maxSize = 10*1024*1024
+var upload = multer({
+    storage: storage,
+    limits: {
+        fileSize: maxSize
+    }
+}).array("file")
+
 
 //Router config
 //Rendering HomePage
@@ -16,6 +37,7 @@ router.get('/products',(req,res)=>{
     .then(data=>{res.json(data)})
     .catch(err=>{res.json({"Error":error.message}) })
 });
+
 
 
 // get dogs
@@ -72,6 +94,28 @@ router.post("/product",async(req,res)=>{
     }catch(err){
         res.json({message:err.message});
     }
+})
+
+
+router.post("/upload", (req, res)=>{
+    upload(req, res, err =>{
+        if(err){
+            res.json({message: err.message})
+        }
+        else{
+            // let arr = [req.file.filename]
+            //Insert Data into DB
+            let productInfo =   new  Product({
+                name: req.body.name,
+                image: imgArr
+            })
+
+             productInfo.save()
+// chuwa
+            res.json({message: "Success"});
+            // console.log(("file receive: ", req.file.filename))
+        }
+    })
 })
 
 //Update product
