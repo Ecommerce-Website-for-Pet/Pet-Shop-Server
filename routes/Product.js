@@ -135,7 +135,7 @@ router.patch("/:id",async(req,res)=>{
                 benefit: req.body.benefit,
                 instruction: req.body.instruction}
         })
-        res.json({ message: "success" });
+        res.json({ message: "Success" });
     }catch(err){
         res.json({message:err.message});
     }
