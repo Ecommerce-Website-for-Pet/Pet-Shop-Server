@@ -107,11 +107,13 @@ router.post("/upload", (req, res)=>{
             //Insert Data into DB
             let productInfo =   new  Product({
                 name: req.body.name,
+                category: req.body.category,
                 image: imgArr
             })
 
              productInfo.save()
-// chuwa
+// chuwa  
+            // imgArr =[];
             res.json({message: "Success"});
             // console.log(("file receive: ", req.file.filename))
         }
@@ -143,7 +145,7 @@ router.patch("/:id",async(req,res)=>{
 router.delete("/:id",async(req,res)=>{
     try{
         await Product.remove({_id:req.params.id});
-        res.json({ message: "success" });
+        res.json({ message: "Success" });
     }catch(err){
         res.json({message:err.message});
     }
