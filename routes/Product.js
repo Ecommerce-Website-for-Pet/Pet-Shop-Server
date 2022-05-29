@@ -38,11 +38,11 @@ Product.find({category:/c*/})
 });
 
 //Get product by id
-router.get('/:productId', async(req,res)=>{
+router.get('/products/:productId', async(req,res)=>{
     // console.log(req.params.id);
     // res.send("Server received data!");
     try{
-        let data = await Product.findBy(req.params.productId);
+        let data = await Product.findById(req.params.productId);
         res.json(data);
     }catch(err){
         res.json({message:err.message});
