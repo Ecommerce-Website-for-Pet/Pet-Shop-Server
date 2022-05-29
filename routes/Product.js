@@ -22,7 +22,7 @@ var upload = multer({
     limits: {
         fileSize: maxSize
     }
-}).single("file")
+}).array("file")
 
 
 //Router config
