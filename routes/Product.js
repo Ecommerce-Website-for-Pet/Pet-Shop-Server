@@ -22,7 +22,7 @@ var upload = multer({
     limits: {
         fileSize: maxSize
     }
-}).array("file")
+})
 
 
 //Router config
@@ -97,33 +97,38 @@ router.post("/product",async(req,res)=>{
 })
 
 
-router.post("/upload", (req, res)=>{
-    upload(req, res, err =>{
-        if(err){
-            res.json({message: err.message})
-        }
-        else{
-            // let arr = [req.file.filename]
+router.post("/upload", upload.array('file'),
+    (req, res) =>{
+        const imgs = req.files
+        const imgNames = imgs.map(img => img.filename)
+        
+        try {
+              // let arr = [req.file.filename]
             //Insert Data into DB
             let productInfo =   new  Product({
                 name: req.body.name,
                 category: req.body.category,
-                image: imgArr
+                image: imgNames
             })
 
              productInfo.save()
 // chuwa  
             // imgArr =[];
+            console.log("hello")
             res.json({message: "Success"});
+
             // console.log(("file receive: ", req.file.filename))
+        } catch (error) {
+            res.json({message: "Error"})
         }
-    })
-})
+          
+    }
+)
 
 //Update product
 router.patch("/:id",async(req,res)=>{
     try{
-        await Product.updateOne({_id: req.params.id}, {
+        await Product.findOneAndUpdate({_id: req.params.id}, {
             $set:{name: req.body.name,
                 price: req.body.price,
                 category: req.body.category,

@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
+const middlewareController = require('../controllers/middlewareController');
 
 //import model
 const User = require('../models/User.js');
-const { route } = require('./Product.js');
+
 
 //Router config
 //Rendering HomePage
@@ -14,7 +15,7 @@ router.get('/', (req,res)=>{
 // if (!mongoose.Types.ObjectId.isValid(id) )  return false;
 
 //get all users
-router.get('/users',(req,res)=>{
+router.get('/users',middlewareController.verifyToken,(req,res)=>{
     User.find({})
     .then(data=>{res.json(data)})
     .catch(err=>{res.json({"Error":error.message}) })
@@ -68,7 +69,7 @@ router.patch("/:id", async(req,res)=>{
 })
 
 //Delete User
-router.delete("/:id",async(req,res)=>{
+router.delete("/:id",middlewareController.verifyTokenAndAdminAuth, async(req,res)=>{
     try{
         await User.remove({_id:req.params.id});
         res.json({ message: "Success" });
