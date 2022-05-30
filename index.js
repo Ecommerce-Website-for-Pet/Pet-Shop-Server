@@ -96,6 +96,10 @@ app.use('/', productRouter);
 const userRouter = require('./routes/User');
 app.use('/users', userRouter);
 
+//import auth routing
+const authRouter = require('./routes/auth');
+app.use('/auth', authRouter);
+
 app.listen(port, () => {
     console.log(`My server listening on port ${port}`);
 });

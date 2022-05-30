@@ -44,13 +44,13 @@ try {
             admin: user.admin
         },
         process.env.JWT_ACCESS_KEY,
-        {expiresIn:"2h"}
+        {expiresIn:"30d"}
         );
         const {password, ...others} = user._doc;
         res.status(200).json({...others, accessToken});
     }
 } catch (error) {
-    res.status(500).json(err)
+    res.status(404).json(err)
 }
 })
 module.exports = router;
