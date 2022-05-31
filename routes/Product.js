@@ -78,11 +78,11 @@ router.post("/product",async(req,res)=>{
     let product = new Product({
         name: req.body.name,
         category: req.body.category,
-        image: req.body.image,
-        price: req.body.price,
         label: req.body.label,
+        image: req.body.image,
         weight: req.body.weight,
         color: req.body.color,
+        price: req.body.price,
         description: req.body.description,
         benefit: req.body.benefit,
         instruction: req.body.instruction
@@ -108,11 +108,11 @@ router.post("/upload", upload.array('file'),
             let productInfo =   new  Product({
                 name: req.body.name,
                 category: req.body.category,
-                image: imgNames,
-                price: req.body.price,
                 label: req.body.label,
+                image: imgNames,
                 weight: req.body.weight,
                 color: req.body.color,
+                price: req.body.price,
                 description: req.body.description,
                 benefit: req.body.benefit,
                 instruction: req.body.instruction
