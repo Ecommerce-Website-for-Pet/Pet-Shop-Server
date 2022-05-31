@@ -15,8 +15,13 @@ router.get('/', (req,res)=>{
 // if (!mongoose.Types.ObjectId.isValid(id) )  return false;
 
 //get all users
-router.get('/users',middlewareController.verifyToken,(req,res)=>{
-    User.find({})
+// router.get('/users',middlewareController.verifyToken,(req,res)=>{
+//    return User.find({})
+//     .then(data=>{res.json(data)})
+//     .catch(err=>{res.json({"Error":error.message}) })
+// });
+router.get('/users',(req,res)=>{
+   return User.find({})
     .then(data=>{res.json(data)})
     .catch(err=>{res.json({"Error":error.message}) })
 });

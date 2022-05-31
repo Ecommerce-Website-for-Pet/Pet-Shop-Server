@@ -4,6 +4,8 @@ const app = express();
 const port = 3000;
 const path = require('path');
 
+
+
 //Enable CORS
 const cors = require('cors');
 app.use(cors());
@@ -98,6 +100,7 @@ app.use('/users', userRouter);
 
 //import auth routing
 const authRouter = require('./routes/auth');
+// const { session } = require('passport');
 app.use('/auth', authRouter);
 
 app.listen(port, () => {

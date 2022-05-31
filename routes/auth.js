@@ -4,9 +4,30 @@ const router = express.Router();
 const jwt = require('jsonwebtoken');
 const User = require('../models/User.js');
 const middlewareController = require('../controllers/middlewareController');
-
-
 const bcrypt = require('bcrypt');
+
+// const users = [];
+
+// const passport = require('passport');
+// const initializePassport = require('../config/db/passport');
+// initializePassport(
+//     passport, 
+//     email=> users.find(user=>user.email === email)
+// );
+
+// const flash = require('express-flash');
+// const session = require('express-session');
+// app.use(flash())
+// app.use(session({
+//     secret: process.env.SESSION_SECRET_KEY,
+//     resave: false,
+//     saveUninitialized: false
+// }))
+// app.use(passport.initialize());
+// app.use(session());
+
+
+
 
 //arr push refreshtoken thay cho db
 let refreshTokens =[];
@@ -37,7 +58,12 @@ try {
 
 
 //login user
-router.post('/login', async(req,res)=>{
+router.post('/login',
+// password.authenticate('local',{
+//     successRedirect: '/',
+//     failureRedirect: '/login',
+//     failureFlash: true
+ async(req,res)=>{
 try {
     const user = await User.findOne({email: req.body.email});
     if(!user){
@@ -72,11 +98,15 @@ sameSite: "strict"
         })
         const {password, ...others} = user._doc;
         res.status(200).json({...others, accessToken});
+        console.log("dang nhap thanh cong")
+        res.redirect('/home');
     }
 } catch (err) {
     res.status(500).json(err)
+ }
 }
-})
+)
+
 
 //refresh
 router.post('/refresh', async(req,res)=>{
