@@ -34,8 +34,11 @@ router.post("/admin",async(req,res)=>{
     // console.log("Data from client:", req.body);
     // res.send("Server received data!");
     let admin = new Admin({
-        name: req.body.name,
-        price: req.body.price
+        email: req.body.email,
+        password: req.body.password,
+        fullName: req.body.fullName,
+        phonenumber: req.body.phonenumber,
+        address: req.body.address
     })
     try{
         let p = await admin.save();
@@ -50,7 +53,13 @@ router.post("/admin",async(req,res)=>{
 router.patch("/:id",async(req,res)=>{
     try{
         await Admin.updateOne({_id: req.params.id}, {
-            $set:{name:req.body.name, price: req.body.price}
+            $set:{
+                email: req.body.email,
+                password: req.body.password,
+                fullName: req.body.fullName,
+                phonenumber: req.body.phonenumber,
+                address: req.body.address
+            }
         })
         res.json({ message: "success" });
     }catch(err){
