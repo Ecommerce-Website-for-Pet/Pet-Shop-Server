@@ -77,10 +77,10 @@ router.post("/product",async(req,res)=>{
     // res.send("Server received data!");
     let product = new Product({
         name: req.body.name,
-        price: req.body.price,
         category: req.body.category,
-        label: req.body.label,
         image: req.body.image,
+        price: req.body.price,
+        label: req.body.label,
         weight: req.body.weight,
         color: req.body.color,
         description: req.body.description,
@@ -108,7 +108,14 @@ router.post("/upload", upload.array('file'),
             let productInfo =   new  Product({
                 name: req.body.name,
                 category: req.body.category,
-                image: imgNames
+                image: imgNames,
+                price: req.body.price,
+                label: req.body.label,
+                weight: req.body.weight,
+                color: req.body.color,
+                description: req.body.description,
+                benefit: req.body.benefit,
+                instruction: req.body.instruction
             })
 
              productInfo.save()
