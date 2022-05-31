@@ -98,6 +98,10 @@ app.use('/', productRouter);
 const userRouter = require('./routes/User');
 app.use('/users', userRouter);
 
+//Import Admin Routing
+const adminRouter = require('./routes/Admin');
+app.use('/admins', adminRouter);
+
 //import auth routing
 const authRouter = require('./routes/auth');
 // const { session } = require('passport');
